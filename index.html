@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitrine Argor Interaction</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            overflow: hidden;
+        }
+        .vitrine-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Style des images de fond superposées */
+        .bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            z-index: 1;
+        }
+        /* REMPLACE LES LIENS CI-DESSOUS PAR TES URLS GITHUB COPIÉES A L'ÉTAPE 4 */
+        .bg1 { background-image: url('https://raw.githubusercontent.com/Diaminor/Diaminor-web-site/refs/heads/main/054.JPG'); }
+        .bg2 { background-image: url('LIEN_DE_TON_IMAGE_ARGENT'); }
+        .bg3 { background-image: url('LIEN_DE_TON_IMAGE_PIERRES'); }
+        .bg4 { background-image: url('LIEN_DE_TON_IMAGE_INVEST'); }
+        
+        .bg-img.active {
+            opacity: 1;
+        }
+        /* Voile sombre pour garder le texte lisible */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 2;
+        }
+        /* Structure en 4 colonnes */
+        .content-wrapper {
+            position: relative;
+            z-index: 3;
+            display: table;
+            width: 100%;
+            height: 100%;
+            table-layout: fixed;
+        }
+        .bloc-item {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 40px 20px;
+            color: white;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .bloc-item:last-child {
+            border-right: none;
+        }
+        .bloc-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+        .bloc-item h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .bloc-item p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vitrine-container">
+    <div class="bg-img bg1 active"></div>
+    <div class="bg-img bg2"></div>
+    <div class="bg-img bg3"></div>
+    <div class="bg-img bg4"></div>
+    
+    <div class="overlay"></div>
+
+    <div class="content-wrapper">
+        <div class="bloc-item" onmouseover="changeBg(1)">
+            <h2>Rachat or</h2>
+            <p>Vendez votre OR sous toutes ses formes et carats ! Alexandre, expert en métaux précieux, étudiera la valeur de votre or de façon immédiate et gratuite.</p>
+        </div>
+        <div class="bloc-item" onmouseover="changeBg(2)">
+            <h2>Rachat argent & autres</h2>
+            <p>Votre bijouterie Argor à Montpellier vous propose de racheter vos biens en ARGENT, PLATINE et PALLADIUM après une évaluation fiable.</p>
+        </div>
+        <div class="bloc-item" onmouseover="changeBg(3)">
+            <h2>Rachat pierres précieuses</h2>
+            <p>DIAMANT, RUBIS, SAPHIR... Chez Argor vos pierres précieuses ont de la valeur ! Après une expertise minutieuse et précise, une offre vous sera faite.</p>
+        </div>
+        <div class="bloc-item" onmouseover="changeBg(4)">
+            <h2>Or investissement</h2>
+            <p>La bijouterie Argor propose à la vente PIÈCES, LINGOTS et LINGOTINS en OR. Notre expert saura vous conseiller et guider dans votre investissement.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function changeBg(index) {
+    const backgrounds = document.querySelectorAll('.bg-img');
+    backgrounds.forEach((bg, i) => {
+        if (i === (index - 1)) {
+            bg.classList.add('active');
+        } else {
+            bg.classList.remove('active');
+        }
+    });
+}
+</script>
+
+</body>
+</html>
