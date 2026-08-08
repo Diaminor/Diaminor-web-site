@@ -1,15 +1,29 @@
-<!DOCTYPE html>
-<html lang="fr">
 <style>
+    /* 1. Réinitialisation globale des marges pour éviter la bande blanche */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    /* 2. Conteneur principal en pleine largeur */
     .vitrine-container {
         position: relative;
-        width: 100%;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
         height: 100vh;
-        overflow: hidden;
+        overflow: hidden; /* Empêche les images de déborder sans bloquer le scroll du site */
         font-family: 'Helvetica Neue', Arial, sans-serif;
     }
     
-    /* Images de fond superposées */
+    /* 3. Images de fond superposées */
     .bg-img {
         position: absolute;
         top: 0;
@@ -23,7 +37,7 @@
         z-index: 1;
     }
     
-    /* --- VOS URLS WORDPRESS ICI --- */
+    /* --- VOS URLS DE LA MÉDIATHÈQUE WORDPRESS ICI --- */
     .bg1 { background-image: url('http://diaminor.local/wp-content/uploads/2026/07/bijoux-018-scaled.jpg'); }
     .bg2 { background-image: url('https://raw.githubusercontent.com/Diaminor/Diaminor-web-site/refs/heads/main/DSC02585.JPG'); }
     .bg3 { background-image: url('http://diaminor.local/wp-content/uploads/2026/07/bijoux-018-scaled.jpg'); }
@@ -33,7 +47,7 @@
         opacity: 1;
     }
 
-    /* Voile sombre */
+    /* 4. Voile sombre pour le contraste du texte */
     .overlay {
         position: absolute;
         top: 0;
@@ -44,29 +58,27 @@
         z-index: 2;
     }
 
-    /* Structure en 4 colonnes */
+    /* 5. Structure Flexbox des 4 colonnes */
     .content-wrapper {
         position: relative;
         z-index: 3;
-        display: table;
+        display: flex;
         width: 100%;
         height: 100%;
-        table-layout: fixed;
     }
 
     .bloc-item {
-        display: table-cell;
-        vertical-align: middle;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         padding: 40px 20px;
         color: white;
         text-align: center;
-        border-right: 1px solid rgba(255, 255, 255, 0.15);
         transition: background 0.3s;
         text-decoration: none;
-    }
-
-    .bloc-item:last-child {
-        border-right: none;
+        position: relative; /* Indispensable pour la barre personnalisée */
     }
 
     .bloc-item:hover {
@@ -74,13 +86,29 @@
         cursor: pointer;
     }
 
-    /* Styles des textes de base */
+    /* 6. Barres de séparation ajustables */
+    .bloc-item::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 30%; /* <--- MODIFIEZ CETTE VALEUR POUR LA HAUTEUR DES BARRES (ex: 30%, 70%, 200px) */
+        width: 1px;
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .bloc-item:last-child::after {
+        display: none; /* Supprime la barre à droite de la dernière colonne */
+    }
+
+    /* 7. Styles des textes */
     .bloc-item h2 {
         font-size: 24px;
         margin-bottom: 15px;
         font-weight: bold;
         color: #ffffff;
-        transition: color 0.3s ease; /* Transition fluide de la couleur */
+        transition: color 0.3s ease;
     }
 
     .bloc-item p {
@@ -90,14 +118,14 @@
         transition: color 0.3s ease;
     }
 
-    /* --- EFFET HOVER EN ROUGE (HEXADÉCIMAL) --- */
-    /* Vous pouvez remplacer #FF0000 par le code rouge de votre choix */
+    /* 8. Effet survol (hover) rouge hexadécimal */
     .bloc-item:hover h2,
     .bloc-item:hover p {
-        color: #FF0000; 
+        color: #FF0000; /* <--- MODIFIEZ CE CODE HEXA SI BESOIN */
     }
 </style>
 
+<!-- STRUCTURE HTML -->
 <div class="vitrine-container">
     <div class="bg-img bg1 active"></div>
     <div class="bg-img bg2"></div>
@@ -126,6 +154,7 @@
     </div>
 </div>
 
+<!-- SCRIPT JAVASCRIPT -->
 <script>
 function changeBg(index) {
     const backgrounds = document.querySelectorAll('.bg-img');
